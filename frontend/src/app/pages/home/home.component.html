@@ -1,0 +1,42 @@
+<app-header [user]="user"
+            [downloadStatus]="downloadStatus"
+            (downloadAction)="downloadReport()"></app-header>
+
+<section class="home">
+  <app-container>
+    <div class="home-header">
+      <h1>
+        Matchings
+        <app-count *ngIf="!loading" [count]="matchings.length"></app-count>
+      </h1>
+      <button (click)="toggleConfiguration()"
+              *ngIf="showConfiguration"
+              class="config">
+        Configure
+        <fa-icon [icon]="configIcon"></fa-icon>
+      </button>
+    </div>
+  </app-container>
+
+  <app-configuration (configClosed)="toggleConfiguration()"
+                     *ngIf="showConfiguration"
+                     [configuration]="configuration"
+                     [isOpened]="configOpened"
+                     [patients]="patients"
+                     (configSubmitted)="calculate($event)"
+  ></app-configuration>
+
+  <app-content>
+    <h3 *ngIf="!loading && matchings.length === 0">No matchings were found.<br>Try to change settings and recalculate.</h3>
+    <app-item-list *ngIf="!loading && matchings.length"
+                   [listItemDetailComponent]="listItemDetailComponent"
+                   [listItemComponent]="listItemComponent"
+                   [items]="matchings"
+                   [configuration]="appConfiguration"
+                   [patients]="patients"></app-item-list>
+  </app-content>
+
+</section>
+
+<app-alert></app-alert>
+<app-loading [show]="loading"></app-loading>

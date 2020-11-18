@@ -1,0 +1,8 @@
+@import "../../../styles/variables";
+
+.container {
+  padding: 0 $padding-x;
+  width: 100%;
+  max-width: $container-max-width;
+  margin: auto;
+}

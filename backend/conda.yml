@@ -1,0 +1,17 @@
+name: cee-hacks-2020-images-backend
+channels:
+  - conda-forge
+dependencies:
+  - pip=20.2.4
+  - python=3.9.0
+  - flask=1.1.2
+  - gunicorn=20.0.4
+  - pip:
+      - flake8==3.8.4
+      - mypy==0.790
+      - pylint==2.6.0
+      - pytest==6.1.2
+      - typedload==2.3
+      - flask-restx==0.2.0
+      - flask_bcrypt==0.7.1
+      - pyjwt==1.7.1

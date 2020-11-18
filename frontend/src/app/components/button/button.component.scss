@@ -1,0 +1,82 @@
+@import '../../../styles/variables';
+@import '../../../styles/animations';
+
+.button {
+  min-width: 120px;
+  margin: $item-gap auto 0;
+  font-weight: 600;
+
+  border-radius: $border-radius--wide;
+  color: $white;
+  padding: 0 15px;
+  opacity: 1;
+
+  transition: background-color 0.5s ease, opacity 0.5s ease;
+
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.primary {
+    background-color: $primary;
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+
+  &.success {
+    background-color: $success;
+
+    &:hover {
+      background-color: darken($success, 10%);
+    }
+  }
+
+  &.danger {
+    background-color: $danger;
+
+    &:hover {
+      background-color: darken($danger, 10%);
+    }
+  }
+
+  &.sm {
+    padding: 0 10px;
+    font-size: 14px;
+    min-width: 0;
+    height: 30px;
+    margin: 0;
+  }
+
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    fa-icon {
+      width: 20px;
+      height: 20px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-left: 10px;
+      transform: none;
+      animation: rotate 0.5s linear infinite;
+    }
+  }
+
+  ::ng-deep mat-icon {
+    margin-left: 10px;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

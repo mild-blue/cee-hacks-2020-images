@@ -1,0 +1,18 @@
+name: cee-hacks-2020-images-worker
+channels:
+  - conda-forge
+dependencies:
+  - pip=20.2.4
+  - python=3.9.0
+  - tesserocr=2.5.1
+  - pip:
+      - opencv-python==4.4.0.46
+      - pdf2image==1.14.0
+      - pillow==8.0.1
+      - pytesseract==0.3.6
+      - flake8==3.8.4
+      - mypy==0.790
+      - pylint==2.6.0
+      - pytest==6.1.2
+      - typedload==2.3
+      - APScheduler==3.6.3

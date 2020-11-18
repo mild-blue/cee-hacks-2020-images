@@ -1,0 +1,6 @@
+[flake8]
+doctests = True
+exclude = __pycache__
+max-complexity = 10
+max-line-length = 150
+statistics = True

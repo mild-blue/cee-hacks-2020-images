@@ -1,0 +1,29 @@
+@import "../../../styles/variables";
+
+:host {
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  bottom: 70%;
+  left: 100%;
+
+  color: white;
+  background: $success;
+  border-radius: $border-radius;
+
+  font-weight: 700;
+  font-size: 12px;
+  margin-left: 5px;
+  padding: 1px 6px 1px 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.zero {
+    background: $gray-400;
+    color: $gray-600;
+  }
+}

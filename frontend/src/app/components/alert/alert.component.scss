@@ -1,0 +1,59 @@
+@import "../../../styles/variables";
+
+:host {
+  position: fixed;
+  top: $padding-y;
+  right: $padding-x;
+
+  max-height: 110px;
+  overflow: hidden;
+}
+
+.alert + .alert {
+  margin-top: 10px;
+}
+
+.alert {
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 15px;
+
+  opacity: 1;
+  transition: none;
+
+  &.fade {
+    opacity: 0;
+    transition: opacity 5s linear;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-success {
+    color: darken($success, 10%);
+    background-color: lighten($success, 40%);
+    border-color: lighten($success, 20%);
+  }
+
+  &-danger {
+    color: darken($danger, 10%);
+    background-color: lighten($danger, 40%);
+    border-color: lighten($danger, 20%);
+  }
+
+  .close {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: inherit;
+    text-shadow: 0 1px 0 $white;
+    margin-left: 20px;
+  }
+}

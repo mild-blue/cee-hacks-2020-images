@@ -1,0 +1,42 @@
+// === BRAND COLORS === //
+$brand-red: #e2001a;
+$brand-grey-dark: #dddddd;
+$brand-grey-darker: #666666;
+
+// === GRAYS === //
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+// === APP COLORS === //
+$black: #000000;
+$white: #ffffff;
+$light: #f9f9f9;
+$dark: $brand-grey-darker;
+$primary: $brand-red;
+$accent: #007bff;
+$success: #28a745;
+$danger: #dc3545;
+
+
+// === ANTIBODIES & ANTIGENS CODES === //
+// basic code
+$code-bg--basic: $gray-200;
+$code-border-color--basic: $gray-600;
+$code-color--basic: $gray-600;
+
+// matching code
+$code-bg--matching: rgba($success, 0.2);
+$code-border-color--matching: $success;
+$code-color--matching: $success;
+
+// bad matching code
+$code-bg--bad-matching: rgba($danger, 0.2);
+$code-border-color--bad-matching: $danger;
+$code-color--bad-matching: $danger;

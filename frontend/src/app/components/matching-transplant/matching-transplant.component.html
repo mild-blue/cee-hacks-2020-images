@@ -1,0 +1,67 @@
+<div *ngIf="transplant" class="transplant">
+  <div class="transplant-header">
+    <app-patient-pair [pair]="transplant"></app-patient-pair>
+
+    <div class="score">
+      Score: <span>{{ totalScore }}</span>
+    </div>
+  </div>
+
+  <div class="transplant-content">
+    <table>
+      <tbody>
+      <tr>
+        <td></td>
+        <td>
+          <div class="center-holder">
+            <patient [patient]="transplant.d"></patient>
+          </div>
+        </td>
+        <td colspan="2">
+          <div class="center-holder">
+            <patient [patient]="transplant.r"></patient>
+          </div>
+        </td>
+        <td>Score</td>
+      </tr>
+      <tr>
+        <td>Blood type</td>
+        <td>
+          <app-code [class.matching]="transplant.compatible_blood || pairBloodCompatible">{{ transplant.d.parameters.blood_group }}</app-code>
+        </td>
+        <td colspan="2">
+          <app-code [class.matching]="transplant.compatible_blood || pairBloodCompatible">{{ transplant.r.parameters.blood_group }}</app-code>
+          <div class="small">
+            Acceptable:
+            <app-code *ngFor="let bloodGroup of transplant.r.acceptable_blood_groups">{{ bloodGroup }}</app-code>
+          </div>
+        </td>
+        <td>-</td>
+      </tr>
+      <tr class="anti-header">
+        <td></td>
+        <td>Antigens</td>
+        <td>Antigens</td>
+        <td>Antibodies</td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let prefix of prefixes">
+        <td>{{prefix}}</td>
+        <td>
+          <app-code *ngFor="let code of getCodesByPrefix(transplant.donor_antigens, prefix)"
+                    [class]="getDonorAntigenClass(code)">{{ code }}</app-code>
+        </td>
+        <td>
+          <app-code *ngFor="let code of getCodesByPrefix(transplant.recipient_antigens, prefix)"
+                    [class]="getRecipientAntigenClass(code)">{{ code }}</app-code>
+        </td>
+        <td>
+          <app-code *ngFor="let code of getCodesByPrefix(transplant.recipient_antibodies, prefix)"
+                    [class]="getRecipientAntibodyClass(code)">{{ code }}</app-code>
+        </td>
+        <td>{{ getHlaScoreByPrefix(prefix) }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

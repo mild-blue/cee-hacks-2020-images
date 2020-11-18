@@ -1,0 +1,13 @@
+dockerbase/
+Dockerfile.*
+README.md
+.gitignore
+.env.*
+.env
+.mypy_cache/
+.idea/
+.github/
+docs/
+docker-compose.yml
+frontend/node_modules/
+frontend/dist/

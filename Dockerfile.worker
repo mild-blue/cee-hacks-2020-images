@@ -1,0 +1,39 @@
+# Build worker
+FROM mildblue/cee-hacks-2020-base AS worker-build
+LABEL description="CEE Hacks 2020 backend"
+LABEL project="mildblue:cee-hacks-2020-images-worker"
+
+WORKDIR /app
+
+# Install dependencies
+COPY worker/conda.yml .
+RUN conda env create -f conda.yml
+# Register conda in the .bashrc
+RUN conda init bash
+
+# Do all your magic from here
+# Copy rest of the app
+COPY worker ./worker
+COPY common ./common
+
+RUN grep -v "-e \." ./common/requirements.txt > temp && mv temp ./common/requirements.txt
+
+# RUN activate cee-hacks-2020-images-worker && pip install ./common && pip install -r ./common/requirements.txt
+
+# Install common module
+RUN . ~/.bashrc && \
+    conda activate cee-hacks-2020-images-worker && \
+    activate cee-hacks-2020-images-worker && \
+    pip install ./common && \
+    pip install -r ./common/requirements.txt
+
+# Create version file
+ARG release_version=development-docker
+ENV RELEASE_FILE_PATH=./release.txt
+RUN echo $release_version > $RELEASE_FILE_PATH
+
+# Start the app - one must initialize shell beforehand
+CMD . ~/.bashrc && \
+    conda activate cee-hacks-2020-images-worker && \
+    activate cee-hacks-2020-images-worker && \
+    cd worker && python worker.py

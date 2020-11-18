@@ -1,0 +1,111 @@
+@import "../../../styles/breakpoints";
+@import "../../../styles/variables";
+
+.configuration {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+
+  position: fixed;
+  top: 50px;
+  transition: top 0.5s ease-out, opacity 0.5s ease-out;
+
+  border-radius: $border-radius--wide $border-radius--wide 0;
+  box-shadow: $box-shadow--wide;
+
+  &.open {
+    opacity: 1;
+    top: 20px;
+    z-index: 100;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    background: $white;
+    padding: $padding-y $padding-x calc(#{$padding-y} * 4);
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto calc(#{$padding-y} * 2);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $padding-y;
+
+    h1 {
+      margin: 0;
+    }
+
+    .close {
+      font-size: 24px;
+      transition: color 0.2s ease;
+      margin-right: $padding-x;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &__boxes {
+    display: flex;
+    width: 100%;
+    padding: $padding-y $padding-x;
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+    }
+
+    > div {
+      display: flex;
+      flex-basis: 50%;
+      width: 50%;
+
+      @include media-breakpoint-down(md) {
+        flex-direction: column;
+      }
+
+      @include media-breakpoint-down(lg) {
+        flex-basis: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__box, ::ng-deep &__box {
+    border-radius: $border-radius--wide;
+    background: $white;
+    box-shadow: $box-shadow--wide;
+    padding: $padding-y $padding-x;
+    margin-bottom: $box-shadow--wide-size;
+    overflow: hidden;
+
+    margin-left: $item-gap;
+    margin-right: $item-gap;
+  }
+
+  .inputs {
+    display: flex;
+    flex-wrap: wrap;
+
+    .mat-form-field {
+      flex-basis: 50%;
+      width: 50%;
+
+      padding: 0 $item-gap;
+    }
+  }
+
+  .config-form {
+    width: 100%;
+    display: flex;
+
+    .configuration__box {
+      flex-basis: calc(50% - 2 * #{$item-gap});
+      width: calc(50% - 2 * #{$item-gap});
+    }
+  }
+}

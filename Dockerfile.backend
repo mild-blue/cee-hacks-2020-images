@@ -1,0 +1,51 @@
+# Build frontend
+FROM node:12.16.1-alpine as frontend-build
+
+COPY frontend ./frontend
+WORKDIR ./frontend
+RUN npm i
+RUN npm run build-prod
+
+# Build backend
+FROM mildblue/cee-hacks-2020-base AS backend-build
+LABEL description="CEE Hacks 2020 backend"
+LABEL project="mildblue:cee-hacks-2020-images-backend"
+
+WORKDIR /app
+
+# Install dependencies
+COPY backend/conda.yml .
+RUN conda env create -f conda.yml
+# Register conda in the .bashrc
+RUN conda init bash
+
+# Do all your magic from here
+# Copy rest of the app
+COPY backend ./backend
+COPY common ./common
+
+RUN grep -v "-e \." ./common/requirements.txt > temp && mv temp ./common/requirements.txt
+
+# RUN activate cee-hacks-2020-images-backend && pip install ./common && pip install -r ./common/requirements.txt
+
+# Install common module
+RUN . ~/.bashrc && \
+    conda activate cee-hacks-2020-images-backend && \
+    activate cee-hacks-2020-images-backend && \
+    pip install ./common && \
+    pip install -r ./common/requirements.txt
+
+# Copy pre-built frontend
+COPY --from=frontend-build ./frontend/dist/frontend /app/frontend/dist/frontend
+
+# Create version file
+ARG release_version=development-docker
+# ENV RELEASE_FILE_PATH=./release.txt TODO: Lukas FIX
+# RUN echo $release_version > $RELEASE_FILE_PATH
+
+# Start the app - one must initialize shell beforehand
+CMD . ~/.bashrc && \
+    conda activate cee-hacks-2020-images-backend && \
+    activate cee-hacks-2020-images-backend && \
+    cd backend && \
+    gunicorn --bind 0.0.0.0:8080 backend.app:app --preload

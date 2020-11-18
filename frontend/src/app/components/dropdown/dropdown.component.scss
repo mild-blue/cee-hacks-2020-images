@@ -1,0 +1,25 @@
+@import "../../../styles/variables";
+
+:host {
+  position: relative;
+}
+
+.dropdown {
+  display: none;
+  z-index: 10;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  min-width: 250px;
+  background: $white;
+  box-shadow: $box-shadow;
+
+  margin-top: 10px;
+  padding: $padding-y $padding-x;
+
+  &.open {
+    display: block;
+  }
+}

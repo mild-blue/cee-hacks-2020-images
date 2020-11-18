@@ -1,0 +1,40 @@
+@import '../../../styles/animations';
+@import '../../../styles/variables';
+
+.loading {
+  position: fixed;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+
+  width: 40px;
+
+  margin-left: -20px;
+  margin-top: -20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  transition: opacity 0.5s ease;
+
+  &.show {
+    height: 40px;
+    opacity: 1;
+  }
+
+  fa-icon {
+
+    color: $primary;
+
+    font-size: 32px;
+    transform: none;
+
+    animation: rotate 1s ease-in-out infinite;
+  }
+}
