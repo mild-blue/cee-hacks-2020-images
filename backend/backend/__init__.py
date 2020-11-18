@@ -92,13 +92,13 @@ def create_app() -> Flask:
         # serving main html which then asks for all javascript
         @app.route('/')
         def index_html():
-            return send_from_directory('frontend/dist/frontend', 'index.html')
+            return send_from_directory('../../frontend/dist/frontend', 'index.html')
 
         # used only if the there's no other endpoint registered
         # we need it to load static resources for the frontend
         @app.route('/<path:path>', methods=['GET'])
         def static_proxy(path):
-            return send_from_directory('../frontend/dist/frontend', path)
+            return send_from_directory('../../frontend/dist/frontend', path)
 
     def enable_cors():
         @app.after_request
