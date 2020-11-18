@@ -70,11 +70,11 @@ def create_app() -> Flask:
         api.add_namespace(service_namespace, path=f'{V1}/service')
         api.add_namespace(user_namespace, path=f'{V1}/user')
 
-    def init_default_routes():
-        # pylint: disable=unused-variable
-        @app.route('/')
-        def redirect_to_swagger():
-            return redirect(_SWAGGER_URL, code=302)
+    # def init_default_routes():
+    #     # pylint: disable=unused-variable
+    #     @app.route('/')
+    #     def redirect_to_swagger():
+    #         return redirect(_SWAGGER_URL, code=302)
 
     def configure_data_upload(conf: ApplicationConfiguration):
         app.config['MAX_CONTENT_LENGTH'] = conf.max_file_size_mb * 1024 * 1024
@@ -98,7 +98,7 @@ def create_app() -> Flask:
         # we need it to load static resources for the frontend
         @app.route('/<path:path>', methods=['GET'])
         def static_proxy(path):
-            return send_from_directory('../../frontend/dist/frontend', path)
+            return send_from_directory('../frontend/dist/frontend', path)
 
     def enable_cors():
         @app.after_request
@@ -124,7 +124,8 @@ def create_app() -> Flask:
         # configure restrictions for file upload
         configure_data_upload(conf)
         # register basic routes
-        init_default_routes()
+        # init_default_routes()
+        register_static_proxy()
         # finish configuration
         configure_apis()
         return app
