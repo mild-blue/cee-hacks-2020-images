@@ -1,10 +1,11 @@
+import os
 import pathlib
 
-import os
-
+from common.db.database import get_db_session, init_db, migrate_db, build_db_connection_string
+from common.dto.database_configuration import DatabaseConfiguration
 from common.logger import init_logging
 from dotenv import load_dotenv
-from flask import Flask, redirect, send_from_directory, request
+from flask import Flask, send_from_directory
 from flask_restx import Api
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -14,8 +15,6 @@ from backend.api.v1.service_api import namespace as service_namespace
 from backend.api.v1.shared_models import namespace as shared_models_namespace
 from backend.api.v1.user_api import namespace as user_namespace
 from backend.configuration.application_configuration import ApplicationConfiguration, get_application_configuration
-from common.db.database import get_db_session, init_db, migrate_db, build_db_connection_string
-from common.dto.database_configuration import DatabaseConfiguration
 
 _SWAGGER_URL = '/doc/'
 
@@ -103,14 +102,15 @@ def create_app() -> Flask:
     def enable_cors():
         @app.after_request
         def add_headers(response):
-            allowed_origins = {
-                '*'  # proxy on staging, support for swagger
-            }
-            origin = request.headers.get('origin')
-            if origin in allowed_origins:
-                response.headers.add('Access-Control-Allow-Origin', origin)
-                response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-                response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT')
+            # allowed_origins = {
+            #     '*'  # proxy on staging, support for swagger
+            # }
+            # origin = request.headers.get('origin')
+            # if origin in allowed_origins:
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            # response.headers.add('Access-Control-Allow-Origin', origin)
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+            response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT')
             return response
 
     with app.app_context():
@@ -126,6 +126,8 @@ def create_app() -> Flask:
         # register basic routes
         # init_default_routes()
         register_static_proxy()
+        # enable cors
+        enable_cors()
         # finish configuration
         configure_apis()
         return app

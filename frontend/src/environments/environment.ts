@@ -6,8 +6,7 @@ const apiVersion = 'v1';
 
 export const environment = {
   production: false,
-  apiUrl: 'http://206.189.248.138:8090/'
-  // apiUrl: `http://206.189.248.138:8090/${apiVersion}`
+  apiUrl: `http://206.189.248.138:8090/${apiVersion}`
 };
 
 /*
