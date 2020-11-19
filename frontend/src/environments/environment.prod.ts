@@ -2,5 +2,5 @@ const apiVersion = 'v1';
 
 export const environment = {
   production: true,
-  apiUrl: `${window.location.origin}/${apiVersion}`
+  apiUrl: `http://206.189.248.138:8090/${apiVersion}`
 };

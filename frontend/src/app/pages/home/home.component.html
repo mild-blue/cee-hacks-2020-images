@@ -9,10 +9,12 @@
     </div>
   </app-container>
   <app-content>
+    <input (change)="handleFileInput($event.target)"
+           id="file"
+           type="file">
 
+    <app-button (click)="uploadFile()">Upload</app-button>
   </app-content>
 
 </section>
 
-<app-alert></app-alert>
-<app-loading [show]="loading"></app-loading>

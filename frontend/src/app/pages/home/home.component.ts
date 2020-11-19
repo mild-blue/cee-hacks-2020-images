@@ -5,6 +5,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from '@app/services/alert/alert.service';
 import { Subscription } from 'rxjs';
 import { LoggerService } from '@app/services/logger/logger.service';
+import { JobService } from '@app/services/job/job.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,35 @@ import { LoggerService } from '@app/services/logger/logger.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public loading: boolean = false;
-  public user?: User;
+  // eslint-disable-next-line no-null/no-null
+  private _file: File | null = null;
 
-  constructor(private _authService: AuthService,
-              private _alertService: AlertService,
-              private _logger: LoggerService) {
+  constructor(private _jobService: JobService) {
   }
 
   ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
+  }
+
+  handleFileInput(target: EventTarget | null) {
+    if (!target) {
+      return;
+    }
+    // @ts-ignore
+    const files: FileList = target.files;
+    this._file = files.item(0);
+    console.log(this._file);
+  }
+
+  public uploadFile(): void {
+    if (!this._file) {
+      return;
+    }
+    this._jobService.initJob(this._file).subscribe((data: unknown) => {
+      console.log('Upload returned:', data);
+    });
+    this._jobService.getJobStatus(1);
   }
 }
