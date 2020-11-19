@@ -5,6 +5,8 @@ See [architecture.md](docs/architecture.md)
 
 ## Setup:
 
+1. Install [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html).
+
 1. Create file `.env` int the root directory from template file `.env.template`. This file is used
    by **docker-compose** and by **backend** and **worker** module.  
    

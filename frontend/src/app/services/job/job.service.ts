@@ -12,7 +12,7 @@ export class JobService {
   constructor(private _http: HttpClient) {
   }
 
-  public initJob(file: File): Observable<unknown> {
+  public createJob(file: File): Observable<unknown> {
     const uploadData = new FormData();
     uploadData.append('file', file, file.name);
     uploadData.append('metadata', JSON.stringify({key: 'value'}))
@@ -26,12 +26,13 @@ export class JobService {
       });
   }
 
-  public getJobStatus(jobId: number): Observable<unknown> {
+  public getJobStatus(jobId: string): Observable<unknown> {
     return this._http.get<unknown>(
-      `${environment.apiUrl}`
+      `${environment.apiUrl}/job/status/${jobId}`
     ).pipe(
       map((r: unknown) => {
         console.log(r);
+        return r;
       })
     );
   }

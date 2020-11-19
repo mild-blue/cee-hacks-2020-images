@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // eslint-disable-next-line no-null/no-null
   private _file: File | null = null;
+  private _jobId: string | null = null;
 
   constructor(private _jobService: JobService) {
   }
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   handleFileInput(target: EventTarget | null) {
     if (!target) {
+      console.log("File event target is null.")
       return;
     }
     // @ts-ignore
@@ -36,13 +38,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(this._file);
   }
 
-  public uploadFile(): void {
-    if (!this._file) {
+  handleJobIdInput(target: EventTarget | null) {
+    console.log("!!!.")
+    if (!target) {
+      console.log("JobId event target is null.")
       return;
     }
-    this._jobService.initJob(this._file).subscribe((data: unknown) => {
+    // @ts-ignore
+    this._jobId = target.value
+    console.log(this._jobId);
+  }
+
+  public createJob(): void {
+    if (!this._file) {
+      console.log("File is null.")
+      return;
+    }
+    this._jobService.createJob(this._file).subscribe((data: unknown) => {
       console.log('Upload returned:', data);
     });
-    this._jobService.getJobStatus(1);
+  }
+
+  public getJobStatus(): void {
+    if (!this._jobId) {
+      console.log("JobId is null.")
+      return;
+    }
+    this._jobService.getJobStatus(this._jobId).subscribe((data: unknown) => {
+      console.log('Job status returned:', data);
+    });
   }
 }
+
+// 75d7d972-00b0-4aaa-90b2-d5173ea68b97

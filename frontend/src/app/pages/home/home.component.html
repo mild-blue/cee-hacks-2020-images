@@ -9,11 +9,22 @@
     </div>
   </app-container>
   <app-content>
-    <input (change)="handleFileInput($event.target)"
-           id="file"
-           type="file">
+    <div>
+      <div>Create Job</div>
+      <input (change)="handleFileInput($event.target)"
+             id="file"
+             type="file">
 
-    <app-button (click)="uploadFile()">Upload</app-button>
+      <app-button (click)="createJob()">Create Job</app-button>
+    </div>
+
+    <div>
+      <div>Get Job Status</div>
+      <input (change)="handleJobIdInput($event.target)"
+             id="jobId"
+             type="text">
+      <app-button (click)="getJobStatus()">Get Job Status</app-button>
+    </div>
   </app-content>
 
 </section>
