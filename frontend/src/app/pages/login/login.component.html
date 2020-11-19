@@ -1,8 +1,6 @@
 <div class="login">
 
   <div class="login-content">
-    <app-logo></app-logo>
-
     <div class="login-form">
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
         <label [class.error]="(submitted || f.email.value) && f.email.invalid"
