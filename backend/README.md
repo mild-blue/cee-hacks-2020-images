@@ -8,6 +8,7 @@ This module uses Conda.
 1. Execute `make conda-create` which creates Conda env for you.
 1. Execute `conda activate cee-hacks-2020-images-backend` to active environment.
 1. To (re)install **common** module, execute `activate cee-hacks-2020-images-backend && pip install ../common`.
+   It seems that on Ubuntu `pip install ../common` is enough.
 
 ## Development
 
