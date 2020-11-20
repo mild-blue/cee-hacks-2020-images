@@ -61,7 +61,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     needs: [build_worker, build_backend]
     steps:
       - uses: actions/checkout@v2
