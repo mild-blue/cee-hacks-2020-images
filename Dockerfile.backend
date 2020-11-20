@@ -40,8 +40,8 @@ COPY --from=frontend-build ./frontend/dist/frontend /app/frontend/dist/frontend
 
 # Create version file
 ARG release_version=development-docker
-# ENV RELEASE_FILE_PATH=./release.txt TODO: Lukas FIX
-# RUN echo $release_version > $RELEASE_FILE_PATH
+ENV RELEASE_FILE_PATH=./release.txt
+RUN echo $release_version > $RELEASE_FILE_PATH
 
 # Start the app - one must initialize shell beforehand
 CMD . ~/.bashrc && \
